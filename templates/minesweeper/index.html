@@ -1,0 +1,28 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>Mikesweeper</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'css/game.css' %}"/>
+  <script src="static/js/lib/jquery.js"></script>
+  <script src="static/js/lib/pixi.js"></script>
+</head>
+<body>
+  <div class="game_area">
+    <div class='game_canvas'></div>
+    <div class='game_log'></div>
+  </div>
+  <div class="instructions">
+    <p>Click on a tile to reveal it.</p>
+
+    <p>If a number appears in the tile, that's how many mines it is touching</p>
+
+    <p>Shift + click on a tile to put a flag on it!</p>
+
+    <p>Reveal a line, and blow up!</p>
+
+    <p>Flag all of the mines to win!</p>
+  </div>
+
+  <script src="static/js/bundle.js"></script>
+</body>

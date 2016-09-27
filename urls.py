@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from .views import IndexView
 
-app_name = 'mikes_games'
+app_name = 'minesweeper'
 urlpatterns = [
     url(r'$', IndexView.as_view(), name="index")
 ]
