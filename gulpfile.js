@@ -28,7 +28,8 @@ function compile_js() {
     // load and init sourcemaps
     .pipe(sourcemaps.init({loadMaps: true}))
 
-    .pipe(uglify())
+    // turn this back on for prod compiling
+    // .pipe(uglify())
 
     // write sourcemaps
     .pipe(sourcemaps.write('./'))
