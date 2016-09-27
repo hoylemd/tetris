@@ -4,8 +4,8 @@
   <title>Mikesweeper</title>
   {% load staticfiles %}
   <link rel="stylesheet" href="{% static 'css/game.css' %}"/>
-  <script src="static/js/lib/jquery.js"></script>
-  <script src="static/js/lib/pixi.js"></script>
+  <script src="{% static 'js/lib/jquery.js' %}"></script>
+  <script src="{% static 'js/lib/pixi.js' %}"></script>
 </head>
 <body>
   <div class="game_area">
@@ -24,5 +24,5 @@
     <p>Flag all of the mines to win!</p>
   </div>
 
-  <script src="static/js/bundle.js"></script>
+  <script src="{% static 'js/bundle.js' %}"></script>
 </body>
