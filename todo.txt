@@ -1,0 +1,4 @@
+bring the sprites over
+make gulp watch files and recompile
+
+Look into unit tests
