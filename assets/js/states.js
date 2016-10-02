@@ -26,7 +26,7 @@ function LoadingAssetsState(game) {
 
       // Define Textures and Atlases to load here
       var textures = [];
-      var texture_atlases = ['assets/sprites/sprites.json'];
+      var texture_atlases = ['/static/sprites/sprites.json'];
       // Done defining Textures and Atlases
 
       PIXI.loader.add(textures)
