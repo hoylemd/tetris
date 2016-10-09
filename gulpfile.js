@@ -11,6 +11,10 @@ var js_source_path = 'assets/js/';
 var js_dest_path = 'static/js/';
 var js_dist_path = 'dist/js/';
 
+var css_source_path = 'assets/css/';
+var css_dest_path = 'static/css/';
+var css_dist_path = 'dist/css/';
+
 var sprites_path = 'assets/sprites/';
 var sprite_dest_path = 'static/sprites/';
 
@@ -57,6 +61,16 @@ function dist_js() {
     .pipe(gulp.dest(js_dist_path));
 }
 
+function compile_css() {
+  return gulp.src(css_source_path + '*.css')
+    .pipe(gulp.dest(css_dest_path));
+}
+
+function dist_css() {
+  return gulp.src(css_source_path + '*.css')
+    .pipe(gulp.dest(css_dist_path));
+}
+
 function copy_libs() {
   return gulp.src(js_source_path + 'dev_libraries/*.js')
     .pipe(gulp.dest(js_dest_path + 'lib/'));
@@ -73,15 +87,16 @@ function compile_sprites() {
 
 gulp.task('libraries', copy_libs);
 gulp.task('compile_js', compile_js);
+gulp.task('compile_css', compile_css);
 gulp.task('compile_sprites', compile_sprites);
 
-gulp.task('default', ['libraries', 'compile_js', 'compile_sprites']);
+gulp.task('default', ['libraries', 'compile_js', 'compile_css', 'compile_sprites']);
 
 gulp.task('watch_js', function() {
   gulp.watch('assets/js/*.js', ['compile_js']);
 });
 
 gulp.task('dist_js', dist_js);
+gulp.task('dist_css', dist_css);
 
-gulp.task('deploy', ['dist_js']);
-
+gulp.task('deploy', ['dist_js', 'dist_css']);
