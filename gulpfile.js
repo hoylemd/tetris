@@ -7,15 +7,15 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var texturepacker = require('gulp-texturepacker');
 
-var source_path = 'assets/js/';
-var destination_path = 'static/js/';
+var js_source_path = 'assets/js/';
+var js_dest_path = 'static/js/';
+var js_dist_path = 'dist/js/';
 
 var sprites_path = 'assets/sprites/';
 var sprite_dest_path = 'static/sprites/';
 
 function compile_js() {
-
-  return gulp.src(source_path + 'bundle.js', {read: false})
+  return gulp.src(js_source_path + 'bundle.js', {read: false})
     // transform file objects using gulp-tap plugin
     .pipe(tap(function (file) {
 
@@ -32,18 +32,34 @@ function compile_js() {
     // load and init sourcemaps
     .pipe(sourcemaps.init({loadMaps: true}))
 
-    // turn this back on for prod compiling
-    // .pipe(uglify())
-
     // write sourcemaps
     .pipe(sourcemaps.write('./'))
 
-    .pipe(gulp.dest(destination_path));
+    .pipe(gulp.dest(js_dest_path));
+}
+
+function dist_js() {
+  return gulp.src(js_source_path + 'bundle.js', {read: false})
+    // transform file objects using gulp-tap plugin
+    .pipe(tap(function (file) {
+
+      gutil.log('bundling ' + file.path);
+
+      // replace file contents with browserify's bundle stream
+      file.contents = browserify(file.path, {debug: true}).bundle();
+    }))
+
+    // transform streaming contents into buffer contents (because gulp-sourcemaps does not support streaming contents)
+    .pipe(buffer())
+
+    .pipe(uglify())
+
+    .pipe(gulp.dest(js_dist_path));
 }
 
 function copy_libs() {
-  return gulp.src(source_path + 'dev_libraries/*.js')
-    .pipe(gulp.dest(destination_path + 'lib/'));
+  return gulp.src(js_source_path + 'dev_libraries/*.js')
+    .pipe(gulp.dest(js_dest_path + 'lib/'));
 }
 
 function compile_sprites() {
@@ -64,3 +80,8 @@ gulp.task('default', ['libraries', 'compile_js', 'compile_sprites']);
 gulp.task('watch_js', function() {
   gulp.watch('assets/js/*.js', ['compile_js']);
 });
+
+gulp.task('dist_js', dist_js);
+
+gulp.task('deploy', ['dist_js']);
+
