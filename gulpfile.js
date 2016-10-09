@@ -56,7 +56,11 @@ function compile_sprites() {
 }
 
 gulp.task('libraries', copy_libs);
-gulp.task('compile', compile_js);
+gulp.task('compile_js', compile_js);
 gulp.task('compile_sprites', compile_sprites);
 
-gulp.task('default', ['libraries', 'compile', 'compile_sprites']);
+gulp.task('default', ['libraries', 'compile_js', 'compile_sprites']);
+
+gulp.task('watch_js', function() {
+  gulp.watch('assets/js/*.js', ['compile_js']);
+});
