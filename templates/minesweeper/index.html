@@ -4,8 +4,15 @@
   <title>Mikesweeper</title>
   {% load staticfiles %}
   <link rel="stylesheet" href="{% static 'css/game.css' %}"/>
-  <script src="{% static 'js/lib/jquery.js' %}"></script>
-  <script src="{% static 'js/lib/pixi.js' %}"></script>
+    {% if debug %}
+      <script src="{% static 'js/lib/jquery.js' %}"></script>
+      <script src="{% static 'js/lib/pixi.js' %}"></script>
+    {% else %}
+      <script src="http://code.jquery.com/jquery-3.1.1.min.js"
+              integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+              crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.3/pixi.min.js"></script>
+    {% endif %}
 </head>
 <body>
   <div class="game_area">
