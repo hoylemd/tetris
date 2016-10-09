@@ -11,3 +11,5 @@ git commit -m "deploy version $version"
 git tag $version
 git push --tags
 git co -
+git add version
+git commit -m "update version #"
