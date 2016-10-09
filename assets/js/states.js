@@ -68,6 +68,7 @@ function InitializingState(game) {
     }
 
     // add the mines
+    game.remaining_mines = 0;
     for (var i = 0; i < game.MINE_COUNT; i += 1) {
       var done = false;
       while (!done) {
