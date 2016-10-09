@@ -42,7 +42,7 @@ function compile_js() {
 }
 
 function copy_libs() {
-  return gulp.src(source_path + 'lib/*.js')
+  return gulp.src(source_path + 'dev_libraries/*.js')
     .pipe(gulp.dest(destination_path + 'lib/'));
 }
 
