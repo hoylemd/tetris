@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.2.3</string>
         <key>fileName</key>
-        <string>/Users/hoylemd/django_development/minesweeper/assets/sprites/src/sprites.tps</string>
+        <string>/Users/hoylemd/django_development/minesweeper/assets/sprites/sprites.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -141,7 +141,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../sprites.json</filename>
+                <filename>sprites.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
