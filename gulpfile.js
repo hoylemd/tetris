@@ -43,6 +43,10 @@ gulp.task('compile_js', function compile_js() {
     .pipe(gulp.dest(js_dest_path));
 });
 
+gulp.task('watch_js', function() {
+  gulp.watch(js_source_path + '*.js', ['compile_js']);
+});
+
 gulp.task('dist_js', function dist_js() {
   return gulp.src(js_source_path + 'bundle.js', {read: false})
     // transform file objects using gulp-tap plugin
@@ -65,6 +69,10 @@ gulp.task('dist_js', function dist_js() {
 gulp.task('compile_css', function compile_css() {
   return gulp.src(css_source_path + '*.css')
     .pipe(gulp.dest(css_dest_path));
+});
+
+gulp.task('watch_css', function() {
+  gulp.watch(css_source_path + '*.css', ['compile_css']);
 });
 
 gulp.task('dist_css', function dist_css() {
@@ -94,9 +102,5 @@ gulp.task('dist_sprites', function dist_sprites() {
 });
 
 gulp.task('default', ['libraries', 'compile_js', 'compile_css', 'compile_sprites']);
-
-gulp.task('watch_js', function() {
-  gulp.watch('assets/js/*.js', ['compile_js']);
-});
-
 gulp.task('deploy', ['dist_js', 'dist_css', 'dist_sprites']);
+gulp.task('watch', ['watch_js', 'watch_css']);
