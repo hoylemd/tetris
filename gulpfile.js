@@ -16,8 +16,8 @@ var css_dest_path = 'static/css/';
 var css_dist_path = 'dist/css/';
 
 var sprites_source_path = 'assets/sprites/';
-var sprite_dest_path = 'static/sprites/';
-var sprite_dist_path = 'dist/sprites/';
+var sprites_dest_path = 'static/sprites/';
+var sprites_dist_path = 'dist/sprites/';
 
 gulp.task('compile_js', function compile_js() {
   return gulp.src(js_source_path + 'bundle.js', {read: false})
@@ -86,19 +86,27 @@ gulp.task('libraries', function copy_libs() {
 });
 
 gulp.task('compile_sprites', function compile_sprites() {
+  /* doesn't work with free version
   gulp.src([sprites_source_path + 'sprites.tps'])
   .pipe(texturepacker({
       sheet: sprite_dest_path + 'sprites.png',
       data: sprite_dest_path + 'sprites.json'
   }));
+  */
+  return gulp.src(sprites_source_path + '*.{png, json}')
+    .pipe(gulp.dest(sprites_dest_path));
 });
 
 gulp.task('dist_sprites', function dist_sprites() {
+  /* doesn't work with free version
   gulp.src([sprites_source_path + 'sprites.tps'])
   .pipe(texturepacker({
       sheet: sprite_dist_path + 'sprites.png',
       data: sprite_dist_path + 'sprites.json'
   }));
+  */
+  return gulp.src(sprites_source_path + '*.{png, json}')
+    .pipe(gulp.dest(sprites_dist_path));
 });
 
 gulp.task('default', ['libraries', 'compile_js', 'compile_css', 'compile_sprites']);
