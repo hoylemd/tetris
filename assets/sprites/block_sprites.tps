@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.2.3</string>
         <key>fileName</key>
-        <string>/Users/hoylemd/django_development/minesweeper/assets/sprites/sprites.tps</string>
+        <string>/Users/hoylemd/django_development/tetris/assets/sprites/block_sprites.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -104,7 +104,7 @@
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
-            <enum type="AlgorithmSettings::SizeConstraints">POT</enum>
+            <enum type="AlgorithmSettings::SizeConstraints">AnySize</enum>
             <key>forceSquared</key>
             <false/>
             <key>maxRects</key>
@@ -141,7 +141,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>sprites.json</filename>
+                <filename></filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -188,12 +188,13 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../images/excavated.png</key>
-            <key type="filename">../images/exploded.png</key>
-            <key type="filename">../images/flag.png</key>
-            <key type="filename">../images/ground.png</key>
-            <key type="filename">../images/highlight.png</key>
-            <key type="filename">../images/mine.png</key>
+            <key type="filename">../images/I.png</key>
+            <key type="filename">../images/J.png</key>
+            <key type="filename">../images/L.png</key>
+            <key type="filename">../images/O.png</key>
+            <key type="filename">../images/S.png</key>
+            <key type="filename">../images/T.png</key>
+            <key type="filename">../images/Z.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -201,12 +202,13 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../images/excavated.png</filename>
-            <filename>../images/exploded.png</filename>
-            <filename>../images/flag.png</filename>
-            <filename>../images/ground.png</filename>
-            <filename>../images/highlight.png</filename>
-            <filename>../images/mine.png</filename>
+            <filename>../images/Z.png</filename>
+            <filename>../images/I.png</filename>
+            <filename>../images/J.png</filename>
+            <filename>../images/L.png</filename>
+            <filename>../images/O.png</filename>
+            <filename>../images/S.png</filename>
+            <filename>../images/T.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
