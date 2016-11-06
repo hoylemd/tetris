@@ -2,4 +2,4 @@ from django.views.generic import TemplateView
 
 
 class IndexView(TemplateView):
-    template_name = 'minesweeper/index.html'
+    template_name = 'tetris/index.html'

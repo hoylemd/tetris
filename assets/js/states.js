@@ -1,6 +1,6 @@
 var random_int = require('./utils.js').random_int;
 var GameState = require('./game_state.js');
-var Tile = require('./tile.js');
+var Block = require('./block.js');
 
 // Global list of states
 var all_states = {};
@@ -26,7 +26,7 @@ function LoadingAssetsState(game) {
 
       // Define Textures and Atlases to load here
       var textures = [];
-      var texture_atlases = ['/static/sprites/sprites.json'];
+      var texture_atlases = ['/static/sprites/block_sprites.json'];
       // Done defining Textures and Atlases
 
       PIXI.loader.add(textures)
@@ -52,49 +52,22 @@ function InitializingState(game) {
   this.event_handlers = {};
 
   this.update = function InitializingState_update(timedelta) {
-    // initialize
-    game.grid = [];
-    game.mines = [];
-    game.flags = [];
+    // create the playarea
+    var playarea = PIXI.Graphics();
+    playarea.beginFill(game.PLAYAREA_COLOUR);
+    playarea.drawRect(0, 0,
+                      game.PLAYAREA_COLUMNS * Block.BLOCK_WIDTH,
+                      game.PLAYAREA_ROWS * Block.BLOCK_WIDTHy);
+    playarea.endFill();
 
-    // create the tiles
-    for (var x = 0; x < game.GRID_COLUMNS; x += 1) {
-      game.grid[x] = [];
-      for (var y = 0; y < game.GRID_ROWS; y += 1) {
-        var tile = new Tile(x, y);
+    playarea.x = game.LEFT_MARGIN * Block.BLOCK_WIDTH
+    var top = game.TOP_MARGIN + game.TITLE_HEIGHT + game.PLAYAREA_TOP_MARGIN;
+    playarea.y = top * Block.BLOCK_HEIGHT;
 
-        game.addTile(tile);
-      }
-    }
-
-    // add the mines
-    game.remaining_mines = 0;
-    for (var i = 0; i < game.MINE_COUNT; i += 1) {
-      var done = false;
-      while (!done) {
-        var x = random_int(game.GRID_COLUMNS);
-        var y = random_int(game.GRID_ROWS);
-
-        var tile = game.grid[x][y];
-
-        if (!tile.mined) {
-          tile.mined = true;
-          var adjacent_tiles = game.get_adjacent_tiles(x, y);
-          for (var j in adjacent_tiles) {
-            var adjacent = adjacent_tiles[j];
-            adjacent.increment_adjacent();
-          }
-
-          game.remaining_mines += 1;
-          game.mines.push(tile);
-          done = true;
-        }
-      }
-    }
+    game.stage.addChild(playarea);
 
     // start!
-    game.log('Welcome to MikeSweeper!');
-    game.log('There are ' + game.remaining_mines + ' mines.');
+    game.log('Welcome to Tetris');
     game.transition('main');
   };
 }
@@ -110,45 +83,8 @@ function MainState(game) {
     game.log(arguments.message);
   }
 
-  function handle_exploded(object, arguments) {
-    game.transition('game_over');
-  }
-
-  function handle_reveal_area(object, arguments) {
-    game.reveal_area(object);
-  }
-
-  function handle_flagged(object) {
-    if (object.flagged) {
-      game.flags.push(object);
-    } else {
-      game.flags.splice(game.flags.indexOf(object), 1);
-    }
-
-    // update remaining mine count.
-    if (object.mined) {
-      game.remaining_mines += object.flagged ? -1 : 1;
-    }
-
-    if (game.remaining_mines <= 0) {
-      game.transition('game_over');
-    }
-  }
-
-  function handle_tile_clicked(object, shift) {
-    if (shift) {
-      object.flag();
-    } else {
-      object.dig();
-    }
-  }
-
   this.event_handlers = {
     'log': handle_log,
-    'exploded': handle_exploded,
-    'reveal_area': handle_reveal_area,
-    'flagged': handle_flagged,
-    'tile_clicked': handle_tile_clicked
   };
 
   this.update = function MainState_update(timedelta) {
@@ -163,24 +99,15 @@ function GameOverState(game) {
 
   this.name = 'game_over';
 
-  if (game.remaining_mines) {
-    game.log('You blew up!');
-  } else {
-    game.log('Cool! You got them all!');
-  }
-  game.log('Click on the field to play again.');
+  game.log('You lost.');
 
-  for (var i in game.mines) {
-    game.mines[i].reveal_mine();
-  }
-
-  function handle_click(object) {
+  function handle_reset(object) {
     game.reset()
     game.transition('initializing');
   }
 
   this.event_handlers = {
-    'tile_clicked': handle_click
+    'reset': handle_reset
   };
 };
 GameOverState.prototype = Object.create(GameState.prototype);

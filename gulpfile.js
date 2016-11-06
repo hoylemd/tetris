@@ -20,7 +20,7 @@ var sprites_dest_path = 'static/sprites/';
 var sprites_dist_path = 'dist/sprites/';
 
 gulp.task('compile_js', function compile_js() {
-  return gulp.src(js_source_path + 'bundle.js', {read: false})
+  return gulp.src(js_source_path + 'tetris_bundle.js', {read: false})
     // transform file objects using gulp-tap plugin
     .pipe(tap(function (file) {
 
@@ -48,7 +48,7 @@ gulp.task('watch_js', function() {
 });
 
 gulp.task('dist_js', function dist_js() {
-  return gulp.src(js_source_path + 'bundle.js', {read: false})
+  return gulp.src(js_source_path + 'tetris_bundle.js', {read: false})
     // transform file objects using gulp-tap plugin
     .pipe(tap(function (file) {
 

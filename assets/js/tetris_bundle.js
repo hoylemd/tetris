@@ -1,9 +1,9 @@
 var what_time_is_it = require('./utils.js').what_time_is_it;
 
-var MineSweeperGame = require('./minesweeper.js');
+var TetrisGame = require('./tetris.js');
 
 function main() {
-  var game = new MineSweeperGame();
+  var game = new TetrisGame();
   window.the_game = game;
   game.start_time = what_time_is_it();
 
