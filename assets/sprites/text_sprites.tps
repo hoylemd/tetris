@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.2.3</string>
         <key>fileName</key>
-        <string>/Users/hoylemd/django_development/tetris/assets/sprites/block_sprites.tps</string>
+        <string>/Users/hoylemd/django_development/tetris/assets/sprites/text_sprites.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -104,9 +104,9 @@
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
-            <enum type="AlgorithmSettings::SizeConstraints">AnySize</enum>
+            <enum type="AlgorithmSettings::SizeConstraints">WordAligned</enum>
             <key>forceSquared</key>
-            <false/>
+            <true/>
             <key>maxRects</key>
             <struct type="AlgorithmMaxRectsSettings">
                 <key>heuristic</key>
@@ -141,7 +141,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>block_sprites.json</filename>
+                <filename></filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -188,13 +188,42 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../images/blocks/I.png</key>
-            <key type="filename">../images/blocks/J.png</key>
-            <key type="filename">../images/blocks/L.png</key>
-            <key type="filename">../images/blocks/O.png</key>
-            <key type="filename">../images/blocks/S.png</key>
-            <key type="filename">../images/blocks/T.png</key>
-            <key type="filename">../images/blocks/Z.png</key>
+            <key type="filename">../images/letters/0.png</key>
+            <key type="filename">../images/letters/1.png</key>
+            <key type="filename">../images/letters/2.png</key>
+            <key type="filename">../images/letters/3.png</key>
+            <key type="filename">../images/letters/4.png</key>
+            <key type="filename">../images/letters/5.png</key>
+            <key type="filename">../images/letters/6.png</key>
+            <key type="filename">../images/letters/7.png</key>
+            <key type="filename">../images/letters/8.png</key>
+            <key type="filename">../images/letters/9.png</key>
+            <key type="filename">../images/letters/A.png</key>
+            <key type="filename">../images/letters/B.png</key>
+            <key type="filename">../images/letters/C.png</key>
+            <key type="filename">../images/letters/D.png</key>
+            <key type="filename">../images/letters/E.png</key>
+            <key type="filename">../images/letters/F.png</key>
+            <key type="filename">../images/letters/G.png</key>
+            <key type="filename">../images/letters/H.png</key>
+            <key type="filename">../images/letters/I.png</key>
+            <key type="filename">../images/letters/J.png</key>
+            <key type="filename">../images/letters/K.png</key>
+            <key type="filename">../images/letters/L.png</key>
+            <key type="filename">../images/letters/M.png</key>
+            <key type="filename">../images/letters/N.png</key>
+            <key type="filename">../images/letters/O.png</key>
+            <key type="filename">../images/letters/P.png</key>
+            <key type="filename">../images/letters/Q.png</key>
+            <key type="filename">../images/letters/R.png</key>
+            <key type="filename">../images/letters/S.png</key>
+            <key type="filename">../images/letters/T.png</key>
+            <key type="filename">../images/letters/U.png</key>
+            <key type="filename">../images/letters/V.png</key>
+            <key type="filename">../images/letters/W.png</key>
+            <key type="filename">../images/letters/X.png</key>
+            <key type="filename">../images/letters/Y.png</key>
+            <key type="filename">../images/letters/Z.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -202,13 +231,42 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../images/blocks/Z.png</filename>
-            <filename>../images/blocks/I.png</filename>
-            <filename>../images/blocks/J.png</filename>
-            <filename>../images/blocks/L.png</filename>
-            <filename>../images/blocks/O.png</filename>
-            <filename>../images/blocks/S.png</filename>
-            <filename>../images/blocks/T.png</filename>
+            <filename>../images/letters/A.png</filename>
+            <filename>../images/letters/B.png</filename>
+            <filename>../images/letters/C.png</filename>
+            <filename>../images/letters/D.png</filename>
+            <filename>../images/letters/E.png</filename>
+            <filename>../images/letters/F.png</filename>
+            <filename>../images/letters/G.png</filename>
+            <filename>../images/letters/H.png</filename>
+            <filename>../images/letters/I.png</filename>
+            <filename>../images/letters/J.png</filename>
+            <filename>../images/letters/K.png</filename>
+            <filename>../images/letters/L.png</filename>
+            <filename>../images/letters/M.png</filename>
+            <filename>../images/letters/N.png</filename>
+            <filename>../images/letters/O.png</filename>
+            <filename>../images/letters/P.png</filename>
+            <filename>../images/letters/Q.png</filename>
+            <filename>../images/letters/R.png</filename>
+            <filename>../images/letters/S.png</filename>
+            <filename>../images/letters/T.png</filename>
+            <filename>../images/letters/U.png</filename>
+            <filename>../images/letters/V.png</filename>
+            <filename>../images/letters/W.png</filename>
+            <filename>../images/letters/1.png</filename>
+            <filename>../images/letters/X.png</filename>
+            <filename>../images/letters/Y.png</filename>
+            <filename>../images/letters/Z.png</filename>
+            <filename>../images/letters/2.png</filename>
+            <filename>../images/letters/3.png</filename>
+            <filename>../images/letters/4.png</filename>
+            <filename>../images/letters/5.png</filename>
+            <filename>../images/letters/6.png</filename>
+            <filename>../images/letters/7.png</filename>
+            <filename>../images/letters/0.png</filename>
+            <filename>../images/letters/8.png</filename>
+            <filename>../images/letters/9.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
