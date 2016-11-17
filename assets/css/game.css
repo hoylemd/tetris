@@ -7,11 +7,11 @@ body {
   overflow: auto;
 }
 
-.game_canvas, .game_log {
+.game_canvas, .game_log, .instructions{
   float: left;
 }
 
-.game_log {
+.game_log, .instructions {
   max-width: 40em;
   margin-left: 25px;
 }
