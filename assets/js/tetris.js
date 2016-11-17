@@ -24,8 +24,8 @@ function TetrisGame() {
   this.PREVIEW_COLUMNS = 4;
   this.PREVIEW_ROWS = 4;
 
-  var BACKGROUND_COLOUR = 0x999999;
-  var PLAYAREA_COLOUR = 0x777777;
+  this.BACKGROUND_COLOUR = 0x999999;
+  this.PLAYAREA_COLOUR = 0x777700;
 
   this.width = (this.LEFT_MARGIN + this.PLAYAREA_COLUMNS +
                 this.PLAYAREA_RIGHT_MARGIN + this.PREVIEW_TITLE_WIDTH +
