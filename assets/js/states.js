@@ -54,7 +54,7 @@ function InitializingState(game) {
 
   this.update = function InitializingState_update(timedelta) {
     // create the playarea
-    var playarea = PIXI.Graphics();
+    var playarea = new PIXI.Graphics();
     playarea.beginFill(game.PLAYAREA_COLOUR);
     playarea.drawRect(0, 0,
                       game.PLAYAREA_COLUMNS * Block.BLOCK_WIDTH,

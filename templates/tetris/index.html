@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <title>Miketris</title>
   {% load staticfiles %}
-  <link rel="stylesheet" href="{% static 'css/game.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/tetris.css' %}"/>
     {% if debug %}
       <script src="{% static 'js/lib/jquery.js' %}"></script>
       <script src="{% static 'js/lib/pixi.js' %}"></script>
@@ -17,15 +17,19 @@
 <body>
   <div class="game_area">
     <div class='game_canvas'></div>
-    <div class="instructions">
-      <p>It's tetris!</p>
-      <p>Right and Left keys to rotate a Tetromino</p>
-      <p>Up drops the Tetromino immediately</p>
-      <p>Down doubles a tetromino's fall speed</p>
-      <p>If you fill a row with blocks, it disappears and you get points!</p>
-      <p>If there isn't room to spawn a new tetromino, you lose!</P>
+    <div class='sidebar'>
+      <h2>Instructions</h2>
+      <div class="instructions">
+        <p>It's tetris!</p>
+        <p>Right and Left keys to rotate a Tetromino</p>
+        <p>Up drops the Tetromino immediately</p>
+        <p>Down doubles a tetromino's fall speed</p>
+        <p>If you fill a row with blocks, it disappears and you get points!</p>
+        <p>If there isn't room to spawn a new tetromino, you lose!</P>
+      </div>
+      <h2>Log</h2>
+      <div class='game_log'></div>
     </div>
-    <div class='game_log'></div>
   </div>
     <script src="{% static 'js/tetris_bundle.js' %}"></script>
 </body>
