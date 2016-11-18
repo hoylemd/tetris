@@ -66,42 +66,45 @@ function InitializingState(game) {
     backgrounds.beginFill(game.PLAYAREA_COLOUR);
     backgrounds.lineStyle(2, game.PLAYAREA_BORDER_COLOUR, 1);
 
-    // create the title
-    var title = new TextBlock(game.TITLE_LEFT, game.MARGIN, 'TETRIS');
-    game.stage.addChild(title);
-    game.game_objects.push(title);
-
     // create the playarea
     backgrounds.drawRect(game.MARGIN * Block.BLOCK_WIDTH,
                          top * Block.BLOCK_HEIGHT,
                          game.PLAYAREA_COLUMNS * Block.BLOCK_WIDTH,
                          game.PLAYAREA_ROWS * Block.BLOCK_WIDTH);
 
-    // create the preview
-    var preview_title = new TextBlock(second_column, top, 'NEXT');
-    game.stage.addChild(preview_title);
-    game.game_objects.push(preview_title);
-
+    // preview background
     backgrounds.drawRect(second_column * Block.BLOCK_WIDTH,
                          info_top * Block.BLOCK_HEIGHT,
                          game.PREVIEW_WIDTH * Block.BLOCK_WIDTH,
                          game.PREVIEW_HEIGHT * Block.BLOCK_HEIGHT)
+
+    // score background
+    backgrounds.drawRect(third_column * Block.BLOCK_WIDTH,
+                         info_top * Block.BLOCK_HEIGHT,
+                         game.SCORE_WIDTH * Block.BLOCK_WIDTH,
+                         game.SCORE_HEIGHT * Block.BLOCK_HEIGHT);
+
+    backgrounds.endFill();
+    game.stage.addChild(backgrounds);
+
+    // create the title
+    var title = new TextBlock(game.TITLE_LEFT, game.MARGIN, 'TETRIS');
+    game.stage.addChild(title);
+    game.game_objects.push(title);
+    //
+    // create the preview
+    var preview_title = new TextBlock(second_column, top, 'NEXT');
+    game.stage.addChild(preview_title);
+    game.game_objects.push(preview_title);
 
     // create the score
     var score_title = new TextBlock(third_column + 1, top, 'SCORE');
     game.stage.addChild(score_title);
     game.game_objects.push(score_title);
 
-    backgrounds.drawRect(third_column * Block.BLOCK_WIDTH,
-                         info_top * Block.BLOCK_HEIGHT,
-                         game.SCORE_WIDTH * Block.BLOCK_WIDTH,
-                         game.SCORE_HEIGHT * Block.BLOCK_HEIGHT);
-    game.score_indicator = new TextBlock(third_column, info_top, '0');
+    game.score_indicator = new TextBlock(third_column, info_top, "0");
     game.stage.addChild(game.score_indicator);
     game.game_objects.push(game.score_indicator);
-
-    backgrounds.endFill();
-    game.stage.addChild(backgrounds);
 
     // start!
     game.log('Welcome to Tetris');
