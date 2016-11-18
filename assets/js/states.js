@@ -55,7 +55,7 @@ function InitializingState(game) {
 
   this.update = function InitializingState_update(timedelta) {
     // create the title
-    var title = new TextBlock(game.TITLE_LEFT, game.TOP_MARGIN, 'TETRIS');
+    var title = new TextBlock(game.TITLE_LEFT, game.MARGIN, 'TETRIS');
     game.stage.addChild(title);
     game.game_objects.push(title);
 
@@ -68,8 +68,8 @@ function InitializingState(game) {
                       game.PLAYAREA_ROWS * Block.BLOCK_WIDTH);
     playarea.endFill();
 
-    playarea.x = game.LEFT_MARGIN * Block.BLOCK_WIDTH
-    var top = game.TOP_MARGIN + game.TITLE_HEIGHT + game.PLAYAREA_TOP_MARGIN;
+    playarea.x = game.MARGIN * Block.BLOCK_WIDTH
+    var top = game.MARGIN + game.TITLE_HEIGHT + game.MARGIN;
     playarea.y = top * Block.BLOCK_HEIGHT;
 
     game.stage.addChild(playarea);
