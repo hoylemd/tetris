@@ -28,12 +28,16 @@ function TetrisGame() {
   this.PLAYAREA_COLOUR = 0x777777;
   this.PLAYAREA_BORDER_COLOUR = 0x555555;
 
-  this.width = (this.LEFT_MARGIN + this.PLAYAREA_COLUMNS +
+  this.WIDTH = (this.LEFT_MARGIN + this.PLAYAREA_COLUMNS +
                 this.PLAYAREA_RIGHT_MARGIN + this.PREVIEW_TITLE_WIDTH +
-                this.RIGHT_MARGIN) * Block.BLOCK_WIDTH;
-  this.height = (this.TOP_MARGIN + this.TITLE_HEIGHT +
+                this.RIGHT_MARGIN); // 19
+  this.width = this.WIDTH * Block.BLOCK_WIDTH;
+  this.HEIGHT = (this.TOP_MARGIN + this.TITLE_HEIGHT +
                  this.PLAYAREA_TOP_MARGIN + this.PLAYAREA_ROWS +
-                 this.BOTTOM_MARGIN) * Block.BLOCK_HEIGHT;
+                 this.BOTTOM_MARGIN);
+  this.height = this.HEIGHT * Block.BLOCK_HEIGHT;
+  debugger;
+  this.TITLE_LEFT = Math.floor((this.WIDTH - this.TITLE_WIDTH) / 2)
 
   this.cheats = {
   };

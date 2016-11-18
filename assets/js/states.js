@@ -1,6 +1,7 @@
 var random_int = require('./utils.js').random_int;
 var GameState = require('./game_state.js');
 var Block = require('./block.js');
+var TextBlock = require('./textblock.js');
 
 // Global list of states
 var all_states = {};
@@ -53,6 +54,11 @@ function InitializingState(game) {
   this.event_handlers = {};
 
   this.update = function InitializingState_update(timedelta) {
+    // create the title
+    var title = new TextBlock(game.TITLE_LEFT, game.TOP_MARGIN, 'TETRIS');
+    game.stage.addChild(title);
+    game.game_objects.push(title);
+
     // create the playarea
     var playarea = new PIXI.Graphics();
     playarea.beginFill(game.PLAYAREA_COLOUR);
