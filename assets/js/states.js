@@ -56,9 +56,10 @@ function InitializingState(game) {
     // create the playarea
     var playarea = new PIXI.Graphics();
     playarea.beginFill(game.PLAYAREA_COLOUR);
+    playarea.lineStyle(2, game.PLAYAREA_BORDER_COLOUR, 1);
     playarea.drawRect(0, 0,
                       game.PLAYAREA_COLUMNS * Block.BLOCK_WIDTH,
-                      game.PLAYAREA_ROWS * Block.BLOCK_WIDTHy);
+                      game.PLAYAREA_ROWS * Block.BLOCK_WIDTH);
     playarea.endFill();
 
     playarea.x = game.LEFT_MARGIN * Block.BLOCK_WIDTH
