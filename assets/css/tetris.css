@@ -7,15 +7,10 @@ body {
   overflow: auto;
 }
 
-.game_canvas, .sidebar {
+.game_canvasi {
   float: left;
 }
 
-.game_log, .instructions, .sidebar {
+.game_log {
   max-width: 40em;
 }
-
-.sidebar {
-  margin-left: 25px;
-}
-
