@@ -54,26 +54,39 @@ function InitializingState(game) {
   this.event_handlers = {};
 
   this.update = function InitializingState_update(timedelta) {
+
+    // calculate shorthand positions
+    var top = game.MARGIN + game.TITLE_HEIGHT + game.MARGIN;
+    var second_column = game.MARGIN + game.PLAYAREA_COLUMNS + game.MARGIN;
+
+    // prepare background drawing
+    var backgrounds = new PIXI.Graphics();
+    backgrounds.beginFill(game.PLAYAREA_COLOUR);
+    backgrounds.lineStyle(2, game.PLAYAREA_BORDER_COLOUR, 1);
+
     // create the title
     var title = new TextBlock(game.TITLE_LEFT, game.MARGIN, 'TETRIS');
     game.stage.addChild(title);
     game.game_objects.push(title);
 
     // create the playarea
-    var playarea = new PIXI.Graphics();
-    playarea.beginFill(game.PLAYAREA_COLOUR);
-    playarea.lineStyle(2, game.PLAYAREA_BORDER_COLOUR, 1);
-    playarea.drawRect(0, 0,
-                      game.PLAYAREA_COLUMNS * Block.BLOCK_WIDTH,
-                      game.PLAYAREA_ROWS * Block.BLOCK_WIDTH);
-    playarea.endFill();
+    backgrounds.drawRect(game.MARGIN * Block.BLOCK_WIDTH,
+                         top * Block.BLOCK_HEIGHT,
+                         game.PLAYAREA_COLUMNS * Block.BLOCK_WIDTH,
+                         game.PLAYAREA_ROWS * Block.BLOCK_WIDTH);
 
-    playarea.x = game.MARGIN * Block.BLOCK_WIDTH
-    var top = game.MARGIN + game.TITLE_HEIGHT + game.MARGIN;
-    playarea.y = top * Block.BLOCK_HEIGHT;
+    // create the preview
+    var score_title = new TextBlock(second_column, top, 'NEXT');
+    game.stage.addChild(score_title);
+    game.game_objects.push(score_title);
 
-    game.stage.addChild(playarea);
+    backgrounds.drawRect(second_column * Block.BLOCK_WIDTH,
+                         (top + 1) * Block.BLOCK_HEIGHT,
+                         game.PREVIEW_WIDTH * Block.BLOCK_WIDTH,
+                         game.PREVIEW_HEIGHT * Block.BLOCK_HEIGHT)
 
+    backgrounds.endFill();
+    game.stage.addChild(backgrounds);
     // start!
     game.log('Welcome to Tetris');
     game.transition('main');
