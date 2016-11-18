@@ -58,6 +58,8 @@ function InitializingState(game) {
     // calculate shorthand positions
     var top = game.MARGIN + game.TITLE_HEIGHT + game.MARGIN;
     var second_column = game.MARGIN + game.PLAYAREA_COLUMNS + game.MARGIN;
+    var third_column = second_column + game.PREVIEW_WIDTH + game.MARGIN;
+    var info_top = top + game.MARGIN + game.SCORE_TITLE_HEIGHT;
 
     // prepare background drawing
     var backgrounds = new PIXI.Graphics();
@@ -76,17 +78,31 @@ function InitializingState(game) {
                          game.PLAYAREA_ROWS * Block.BLOCK_WIDTH);
 
     // create the preview
-    var score_title = new TextBlock(second_column, top, 'NEXT');
-    game.stage.addChild(score_title);
-    game.game_objects.push(score_title);
+    var preview_title = new TextBlock(second_column, top, 'NEXT');
+    game.stage.addChild(preview_title);
+    game.game_objects.push(preview_title);
 
     backgrounds.drawRect(second_column * Block.BLOCK_WIDTH,
-                         (top + 1) * Block.BLOCK_HEIGHT,
+                         info_top * Block.BLOCK_HEIGHT,
                          game.PREVIEW_WIDTH * Block.BLOCK_WIDTH,
                          game.PREVIEW_HEIGHT * Block.BLOCK_HEIGHT)
 
+    // create the score
+    var score_title = new TextBlock(third_column + 1, top, 'SCORE');
+    game.stage.addChild(score_title);
+    game.game_objects.push(score_title);
+
+    backgrounds.drawRect(third_column * Block.BLOCK_WIDTH,
+                         info_top * Block.BLOCK_HEIGHT,
+                         game.SCORE_WIDTH * Block.BLOCK_WIDTH,
+                         game.SCORE_HEIGHT * Block.BLOCK_HEIGHT);
+    game.score_indicator = new TextBlock(third_column, info_top, '0');
+    game.stage.addChild(game.score_indicator);
+    game.game_objects.push(game.score_indicator);
+
     backgrounds.endFill();
     game.stage.addChild(backgrounds);
+
     // start!
     game.log('Welcome to Tetris');
     game.transition('main');

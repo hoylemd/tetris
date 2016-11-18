@@ -18,7 +18,8 @@ function TetrisGame() {
   this.PREVIEW_HEIGHT = 4;
 
   this.SCORE_WIDTH = 7;
-  this.SCORE_HEIGHT = 2;
+  this.SCORE_HEIGHT = 1;
+  this.SCORE_TITLE_HEIGHT = 1;
 
   this.BACKGROUND_COLOUR = 0x999999;
   this.PLAYAREA_COLOUR = 0x777777;
@@ -31,7 +32,6 @@ function TetrisGame() {
   this.HEIGHT = (this.MARGIN + this.TITLE_HEIGHT +
                  this.MARGIN + this.PLAYAREA_ROWS + this.MARGIN);
   this.height = this.HEIGHT * Block.BLOCK_HEIGHT;
-  debugger;
   this.TITLE_LEFT = Math.floor((this.WIDTH - this.TITLE_WIDTH) / 2)
 
   this.cheats = {
