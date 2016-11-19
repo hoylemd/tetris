@@ -6,13 +6,14 @@ var Block = require('./block.js');
 var TextureCache = PIXI.utils.TextureCache;
 
 function TextBlock(column, row, text) {
+  this.text = text || '';
+  this.last_text = '';
+
   Block.call(this, column, row);
 
-  this.last_text = '';
-  this.text = text;
+  this.type_string = 'TextBlock';
 
   this.update = function TextBlock_update(timedelta) {
-    this.type_string = 'TextBlock'
 
     TextBlock.prototype.update.call(this, timedelta);
 

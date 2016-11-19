@@ -2,6 +2,7 @@ var random_int = require('./utils.js').random_int;
 var GameState = require('./game_state.js');
 var Block = require('./block.js');
 var TextBlock = require('./textblock.js');
+var Counter = require('./counter.js');
 
 // Global list of states
 var all_states = {};
@@ -91,7 +92,7 @@ function InitializingState(game) {
     var title = new TextBlock(game.TITLE_LEFT, game.MARGIN, 'TETRIS');
     game.stage.addChild(title);
     game.game_objects.push(title);
-    //
+
     // create the preview
     var preview_title = new TextBlock(second_column, top, 'NEXT');
     game.stage.addChild(preview_title);
@@ -102,7 +103,7 @@ function InitializingState(game) {
     game.stage.addChild(score_title);
     game.game_objects.push(score_title);
 
-    game.score_indicator = new TextBlock(third_column, info_top, "0");
+    game.score_indicator = new Counter(third_column, info_top, 7);
     game.stage.addChild(game.score_indicator);
     game.game_objects.push(game.score_indicator);
 
@@ -128,7 +129,11 @@ function MainState(game) {
   };
 
   this.update = function MainState_update(timedelta) {
-    console.log('main');
+    this.since += timedelta;
+    if (game.score !== game.last_score) {
+      game.score_indicator.value = game.score;
+      game.last_score = game.score;
+    }
   }
 };
 MainState.prototype = Object.create(GameState.prototype);

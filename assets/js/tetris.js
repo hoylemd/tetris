@@ -39,6 +39,7 @@ function TetrisGame() {
 
   this.tetrominos = []
   this.score = 0;
+  this.last_score = this.score;
 
   Game.call(this, game_states);
 
