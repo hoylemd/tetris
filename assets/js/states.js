@@ -5,6 +5,7 @@ var Block = require('./block.js');
 var TextBlock = require('./textblock.js');
 var Counter = require('./counter.js');
 var Tetromino = require('./tetromino.js');
+var BlockSpace = require('./block_space.js');
 
 // Global list of states
 var all_states = {};
@@ -64,24 +65,19 @@ function InitializingState(game) {
     var info_top = top + game.MARGIN + game.SCORE_TITLE_HEIGHT;
 
     // create the playarea
-    var playarea = new Block(game.MARGIN, top,
-                              game.PLAYAREA_COLUMNS,
-                              game.PLAYAREA_ROWS);
-    playarea.time_to_fall = game.INITIAL_TIME_TO_FALL;
-    playarea.seed = {column: 4, row: 19};
-    playarea.add_tetromino = function Playarea_add_tetromino(tetromino) {
-      this.addChild(tetromino);
-      tetromino.column = this.seed.column;
-      tetromino.row = this.seed.row;
-    };
+    var playarea = new BlockSpace(game.MARGIN, top,
+                                  game.PLAYAREA_COLUMNS,
+                                  game.PLAYAREA_ROWS,
+                                  {column: 4, row: 19},
+                                  game.INITIAL_TIME_TO_FALL);
     game.add_object(playarea);
     game.playarea = playarea;
 
     // preview area
-    var preview_area = new Block(second_column, info_top,
-                                  game.PREVIEW_WIDTH,
-                                  game.PREVIEW_HEIGHT);
-    preview_area.seed = {column: 1, row: 2};
+    var preview_area = new BlockSpace(second_column, info_top,
+                                      game.PREVIEW_WIDTH,
+                                      game.PREVIEW_HEIGHT,
+                                      {column: 1, row: 2});
     game.add_object(preview_area);
     game.preview_area = preview_area;
 
