@@ -31,10 +31,31 @@ var tetromino_types = {
     'colour': 0xCCAA00,
     'border': 0xAA8800,
     'shape': [[-1, 0], [1, 0], [1, 1]]}
-}
+};
 
-function Tetromino(column, row, type) {
+function Tetromino(type) {
+  this.type = type;
 
+  var spec = tetromino_types[type];
+
+  if (!spec) {
+    raise('Cannot inistantiate a Tetromino of type "' + type + '"');
+  }
+
+  if (!space) {
+    raise('Cannot instantiate a Tetromino without a space');
+  }
+
+  this.rotation = 0;
+  this.last_rotation = null;
+  this.time_since_fall = 0;
+
+  this.update = function Tetromino_update(timedelta) {
+    if (this.parent && this.parent.time_to_fall) {
+      var rotated_or_new = this.rotation !== this.last_rotation;
+      var falling = this.time_since_fall > this.parent.time_to_fall;
+    }
+  };
 }
 Tetromino.prototype = Block(0, 0);
 
