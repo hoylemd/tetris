@@ -28,20 +28,20 @@ function Block(column, row) {
   this.row = row;
   this.y = BLOCK_WIDTH * row;
 
-  this.type_string = 'Block'
+  this.type_string = 'Block';
 
   this.stringify = function Block_stringify() {
     return this.type_string + ' at ' + this.positionString();
-  }
+  };
 
   this.positionString = function Block_positionString() {
-    return '(' + this.column + ', ' + this.row + ')'
-  }
+    return '(' + this.column + ', ' + this.row + ')';
+  };
 
   this.updatePosition = function Block_updatePosition(column, row) {
     this.x = column * BLOCK_WIDTH;
     this.y = row * BLOCK_HEIGHT;
-  }
+  };
 
   // engine methods
   this.update = function Block_update(timedelta) {
@@ -51,13 +51,13 @@ function Block(column, row) {
     if (x_drift || y_drift) {
       this.updatePosition(this.column, this.row);
       console.warning('a block (' + this.stringify() +
-                      ') is not snapped to the grid! Adjusting.')
+                      ') is not snapped to the grid! Adjusting.');
     }
 
     var new_events = this.events;
     this.events = {};
     return new_events;
-  }
+  };
 
   // Input handlers
   this.interactive = false;
