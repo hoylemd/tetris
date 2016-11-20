@@ -68,20 +68,24 @@ function InitializingState(game) {
     this.playarea = new Block(game.MARGIN, top,
                               game.PLAYAREA_COLUMNS,
                               game.PLAYAREA_ROWS);
+    this.playarea.time_to_fall = game.INITIAL_TIME_TO_FALL;
     game.stage.addChild(this.playarea);
     game.game_objects.push(this.playarea);
+
+    // preview area
+    this.preview_area = new Block(second_column, info_top,
+                                  game.PREVIEW_WIDTH,
+                                  game.PREVIEW_HEIGHT);
+    game.stage.addChild(this.preview_area);
+    game.game_objects.push(this.preview_area);
+
+    // score background
 
     var backgrounds = new PIXI.Graphics();
     backgrounds.beginFill(game.PLAYAREA_COLOUR);
     backgrounds.lineStyle(2, game.PLAYAREA_BORDER_COLOUR, 1);
 
-    // preview background
-    backgrounds.drawRect(second_column * GridElement.WIDTH,
-                         info_top * GridElement.HEIGHT,
-                         game.PREVIEW_WIDTH * GridElement.WIDTH,
-                         game.PREVIEW_HEIGHT * GridElement.HEIGHT);
 
-    // score background
     backgrounds.drawRect(third_column * GridElement.WIDTH,
                          info_top * GridElement.HEIGHT,
                          game.SCORE_WIDTH * GridElement.WIDTH,
