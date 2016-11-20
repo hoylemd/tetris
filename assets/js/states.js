@@ -4,6 +4,7 @@ var GridElement = require('./grid_element.js');
 var Block = require('./block.js');
 var TextBlock = require('./textblock.js');
 var Counter = require('./counter.js');
+var Tetromino = require('./tetromino.js');
 
 // Global list of states
 var all_states = {};
@@ -62,43 +63,49 @@ function InitializingState(game) {
     var third_column = second_column + game.PREVIEW_WIDTH + game.MARGIN;
     var info_top = top + game.MARGIN + game.SCORE_TITLE_HEIGHT;
 
-    // prepare spaces
-
     // create the playarea
-    this.playarea = new Block(game.MARGIN, top,
+    var playarea = new Block(game.MARGIN, top,
                               game.PLAYAREA_COLUMNS,
                               game.PLAYAREA_ROWS);
-    this.playarea.time_to_fall = game.INITIAL_TIME_TO_FALL;
-    this.playarea.seed = {column: 4, row: 19};
-    game.stage.addChild(this.playarea);
-    game.game_objects.push(this.playarea);
+    playarea.time_to_fall = game.INITIAL_TIME_TO_FALL;
+    playarea.seed = {column: 4, row: 19};
+    playarea.add_tetromino = function Playarea_add_tetromino(tetromino) {
+      this.addChild(tetromino);
+      tetromino.column = this.seed.column;
+      tetromino.row = this.seed.row;
+    };
+    game.add_object(playarea);
+    game.playarea = playarea;
 
     // preview area
-    this.preview_area = new Block(second_column, info_top,
+    var preview_area = new Block(second_column, info_top,
                                   game.PREVIEW_WIDTH,
                                   game.PREVIEW_HEIGHT);
-    this.preview_area.seed = {column: 1, row: 2};
-    game.stage.addChild(this.preview_area);
-    game.game_objects.push(this.preview_area);
+    preview_area.seed = {column: 1, row: 2};
+    game.add_object(preview_area);
+    game.preview_area = preview_area;
 
     // create the title
     var title = new TextBlock(game.TITLE_LEFT, game.MARGIN, 'TETRIS');
-    game.stage.addChild(title);
-    game.game_objects.push(title);
+    game.add_object(title);
 
     // create the preview
     var preview_title = new TextBlock(second_column, top, 'NEXT');
-    game.stage.addChild(preview_title);
-    game.game_objects.push(preview_title);
+    game.add_object(preview_title);
 
     // create the score
     var score_title = new TextBlock(third_column + 1, top, 'SCORE');
-    game.stage.addChild(score_title);
-    game.game_objects.push(score_title);
+    game.add_object(score_title);
 
     game.score_indicator = new Counter(third_column, info_top, 7);
-    game.stage.addChild(game.score_indicator);
-    game.game_objects.push(game.score_indicator);
+    game.add_object(game.score_indicator);
+
+    // create the first 2 tetrominos
+    var tetromino = new Tetromino();
+    playarea.add_tetromino(tetromino);
+
+    game.next_tetromino = new Tetromino();
+    game.add_object(game.next_tetromino);
 
     // start!
     game.log('Welcome to Tetris');

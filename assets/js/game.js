@@ -40,7 +40,7 @@ Game.prototype = {
         if (!this.state.handle_event(event, object, events[event])) {
           console.warn("Unhandled Event '" + event + "'.");
         }
-      };
+      }
     }
 
     // render graphics
@@ -80,6 +80,11 @@ Game.prototype = {
     this.log_element.empty();
 
     this.game_objects = [];
+  },
+
+  add_object: function Game_add_object(obj) {
+    this.stage.addChild(obj);
+    this.game_objects.push(obj);
   }
 };
 

@@ -1,6 +1,7 @@
 /* Class for tetrominos */
 
 var GridElement = require('./grid_element.js');
+var random_int = require('./utils.js').random_int;
 
 var tetromino_types = {
   'I': {
@@ -32,18 +33,15 @@ var tetromino_types = {
     'border': 0xAA8800,
     'shape': [[-1, 0], [1, 0], [1, 1]]}
 };
+var type_list = Object.keys(tetromino_types);
 
 function Tetromino(type) {
-  this.type = type;
+  this.type = type || type_list[random_int(type_list.length)];
 
-  var spec = tetromino_types[type];
+  var spec = tetromino_types[this.type];
 
   if (!spec) {
-    raise('Cannot inistantiate a Tetromino of type "' + type + '"');
-  }
-
-  if (!space) {
-    raise('Cannot instantiate a Tetromino without a space');
+    raise('Cannot inistantiate a Tetromino of type "' + this.type + '"');
   }
 
   this.rotation = 0;
@@ -57,6 +55,6 @@ function Tetromino(type) {
     }
   };
 }
-Tetromino.prototype = GridElement(0, 0);
+Tetromino.prototype = new GridElement(0, 0);
 
 module.exports = Tetromino;

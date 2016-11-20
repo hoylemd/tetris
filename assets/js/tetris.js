@@ -41,6 +41,8 @@ function TetrisGame() {
 
   this.score = 0;
   this.last_score = this.score;
+  this.tetromino = null;
+  this.next_tetromino = null;
 
   Game.call(this, game_states);
 
