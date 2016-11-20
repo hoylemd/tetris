@@ -2,18 +2,33 @@
 
 var GridElement = require('./grid_element.js');
 
-function Block(column, row, colour, border_colour) {
+var DEFAULT_BACKGROUND_COLOUR = 0x777777;
+var DEFAULT_BORDER_COLOUR = 0x555555;
+
+
+function Block(column, row, columns, rows, colour, border_colour) {
   GridElement.call(this, column, row);
 
   this.colour = colour;
   this.border_colour = colour;
 
-  var primitives = new PIXI.Graphics();
-  primitives.beginFill(colour);
-  primitives.lineStyle(2, border_colour, 1);
+  this.columns = columns || 1;
+  this.rows = rows || 1;
 
-  primitives.drawRect(0, 0, GridElement.WIDTH, GridElement.HEIGHT);
+  var background = new PIXI.Graphics();
+  background.beginFill(colour || DEFAULT_BACKGROUND_COLOUR);
+  background.lineStyle(2, border_colour || DEFAULT_BORDER_COLOUR, 1);
+
+  background.drawRect(0, 0,
+                      this.columns * GridElement.WIDTH,
+                      this.rows * GridElement.HEIGHT);
+
+  background.endFill();
+
+  // simple add child because Pixi doesn't include functions in it's constructors
+  background.parent = this;
+  this.children.push(background);
 }
-Block.prototype = GridElement(0, 0);
+Block.prototype = new GridElement(0, 0);
 
 module.exports = Block;

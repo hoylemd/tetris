@@ -1,6 +1,7 @@
 var random_int = require('./utils.js').random_int;
 var GameState = require('./game_state.js');
 var GridElement = require('./grid_element.js');
+var Block = require('./block.js');
 var TextBlock = require('./textblock.js');
 var Counter = require('./counter.js');
 
@@ -61,16 +62,18 @@ function InitializingState(game) {
     var third_column = second_column + game.PREVIEW_WIDTH + game.MARGIN;
     var info_top = top + game.MARGIN + game.SCORE_TITLE_HEIGHT;
 
-    // prepare background drawing
+    // prepare spaces
+
+    // create the playarea
+    this.playarea = new Block(game.MARGIN, top,
+                              game.PLAYAREA_COLUMNS,
+                              game.PLAYAREA_ROWS);
+    game.stage.addChild(this.playarea);
+    game.game_objects.push(this.playarea);
+
     var backgrounds = new PIXI.Graphics();
     backgrounds.beginFill(game.PLAYAREA_COLOUR);
     backgrounds.lineStyle(2, game.PLAYAREA_BORDER_COLOUR, 1);
-
-    // create the playarea
-    backgrounds.drawRect(game.MARGIN * GridElement.WIDTH,
-                         top * GridElement.HEIGHT,
-                         game.PLAYAREA_COLUMNS * GridElement.WIDTH,
-                         game.PLAYAREA_ROWS * GridElement.WIDTH);
 
     // preview background
     backgrounds.drawRect(second_column * GridElement.WIDTH,
