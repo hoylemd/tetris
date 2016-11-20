@@ -28,8 +28,7 @@ function LoadingAssetsState(game) {
 
       // Define Textures and Atlases to load here
       var textures = [];
-      var texture_atlases = ['/static/sprites/block_sprites.json',
-                             '/static/sprites/trono.json'];
+      var texture_atlases = ['/static/sprites/trono.json'];
       // Done defining Textures and Atlases
 
       PIXI.loader.add(textures)
