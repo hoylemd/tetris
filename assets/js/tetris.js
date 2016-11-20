@@ -1,5 +1,5 @@
 var Game = require('./game.js');
-var Block = require('./grid_element.js');
+var GridElement= require('./grid_element.js');
 var game_states = require('./states.js');
 
 function TetrisGame() {
@@ -28,10 +28,10 @@ function TetrisGame() {
   this.WIDTH = (this.MARGIN + this.PLAYAREA_COLUMNS +
                 this.MARGIN + this.PREVIEW_WIDTH +
                 this.MARGIN + this.SCORE_WIDTH + this.MARGIN);
-  this.width = this.WIDTH * Block.WIDTH;
+  this.width = this.WIDTH * GridElement.WIDTH;
   this.HEIGHT = (this.MARGIN + this.TITLE_HEIGHT +
                  this.MARGIN + this.PLAYAREA_ROWS + this.MARGIN);
-  this.height = this.HEIGHT * Block.HEIGHT;
+  this.height = this.HEIGHT * GridElement.HEIGHT;
   this.TITLE_LEFT = Math.floor((this.WIDTH - this.TITLE_WIDTH) / 2);
 
   this.cheats = {

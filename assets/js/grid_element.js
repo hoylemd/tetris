@@ -50,7 +50,7 @@ function GridElement(column, row) {
     var y_drift = this.y % HEIGHT;
     if (x_drift || y_drift) {
       this.updatePosition(this.column, this.row);
-      console.warning('a block (' + this.stringify() +
+      console.warning('a grid element (' + this.stringify() +
                       ') is not snapped to the grid! Adjusting.');
     }
 
