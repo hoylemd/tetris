@@ -1,6 +1,7 @@
 /* Class for the score indicator */
 
 var GridElement = require('./grid_element.js');
+var Block = require('./block.js');
 
 // Alias
 
@@ -10,12 +11,11 @@ var magnitude_abbreviations = 'KMBTQ';
 function Counter(column, row, columns, value) {
   this.value = value || 0;
   this.last_value = null;
-  GridElement.call(this, column, row, '' + value);
-
-  this.columns = columns;
-  this.width = columns * GridElement.WIDTH;
+  Block.call(this, column, row, columns);
 
   this.type_string = 'Counter';
+
+  this.digits = [];
 
   this.update = function Counter_update(timedelta) {
 
@@ -23,8 +23,8 @@ function Counter(column, row, columns, value) {
 
     if (this.value != this.last_value) {
       // remove old sprites
-      for (var i = this.children.length - 1; i >= 0; i -= 1) {
-        this.removeChild(this.children[i]);
+      for (var i in this.digits) {
+        this.removeChild(this.digits[i]);
       }
 
       var value_string = '' + this.value;
@@ -41,15 +41,16 @@ function Counter(column, row, columns, value) {
       for (var c in value_string) {
         var texture = TextureCache[value_string[c]];
         var sprite = new PIXI.Sprite(texture);
-        var offset = -delta_length + this.children.length;
+        var offset = -delta_length + this.digits.length;
         sprite.x = offset * GridElement.WIDTH;
         this.addChild(sprite);
+        this.digits.push(sprite);
       }
 
       this.last_value = this.value;
     }
   };
 }
-Counter.prototype = new GridElement(0, 0);
+Counter.prototype = new Block(0, 0);
 
 module.exports = Counter;

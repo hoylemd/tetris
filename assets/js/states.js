@@ -79,21 +79,6 @@ function InitializingState(game) {
     game.stage.addChild(this.preview_area);
     game.game_objects.push(this.preview_area);
 
-    // score background
-
-    var backgrounds = new PIXI.Graphics();
-    backgrounds.beginFill(game.PLAYAREA_COLOUR);
-    backgrounds.lineStyle(2, game.PLAYAREA_BORDER_COLOUR, 1);
-
-
-    backgrounds.drawRect(third_column * GridElement.WIDTH,
-                         info_top * GridElement.HEIGHT,
-                         game.SCORE_WIDTH * GridElement.WIDTH,
-                         game.SCORE_HEIGHT * GridElement.HEIGHT);
-
-    backgrounds.endFill();
-    game.stage.addChild(backgrounds);
-
     // create the title
     var title = new TextBlock(game.TITLE_LEFT, game.MARGIN, 'TETRIS');
     game.stage.addChild(title);

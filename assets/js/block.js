@@ -15,6 +15,8 @@ function Block(column, row, columns, rows, colour, border_colour) {
   this.columns = columns || 1;
   this.rows = rows || 1;
 
+  this.type_string = 'Block';
+
   var background = new PIXI.Graphics();
   background.beginFill(colour || DEFAULT_BACKGROUND_COLOUR);
   background.lineStyle(2, border_colour || DEFAULT_BORDER_COLOUR, 1);
