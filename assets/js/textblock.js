@@ -1,6 +1,6 @@
 /* Class for retro-style text sprites */
 
-var Block = require('./block.js');
+var GridElement = require('./grid_element.js');
 
 // Alias
 var TextureCache = PIXI.utils.TextureCache;
@@ -9,7 +9,7 @@ function TextBlock(column, row, text) {
   this.text = text || '';
   this.last_text = '';
 
-  Block.call(this, column, row);
+  GridElement.call(this, column, row);
 
   this.type_string = 'TextBlock';
 
@@ -28,14 +28,14 @@ function TextBlock(column, row, text) {
       for (var c in this.text) {
         var texture = TextureCache[this.text[c]];
         var sprite = new PIXI.Sprite(texture);
-        sprite.x = this.children.length * Block.BLOCK_WIDTH;
+        sprite.x = this.children.length * GridElement.WIDTH;
         this.addChild(sprite);
       }
 
       this.last_text = this.text;
     }
-  }
+  };
 }
-TextBlock.prototype = new Block(0, 0)
+TextBlock.prototype = new GridElement(0, 0);
 
 module.exports = TextBlock;

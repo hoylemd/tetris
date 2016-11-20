@@ -1,6 +1,6 @@
 /* Class for tetrominos */
 
-var Block = require('./block.js');
+var GridElement = require('./grid_element.js');
 
 var tetromino_types = {
   'I': {
@@ -57,6 +57,6 @@ function Tetromino(type) {
     }
   };
 }
-Tetromino.prototype = Block(0, 0);
+Tetromino.prototype = GridElement(0, 0);
 
 module.exports = Tetromino;

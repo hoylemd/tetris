@@ -109,6 +109,7 @@ gulp.task('dist_sprites', function dist_sprites() {
     .pipe(gulp.dest(sprites_dist_path));
 });
 
-gulp.task('default', ['libraries', 'compile_js', 'compile_css', 'compile_sprites']);
+gulp.task('compile', ['libraries', 'compile_js', 'compile_css', 'compile_sprites']);
 gulp.task('deploy', ['dist_js', 'dist_css', 'dist_sprites']);
-gulp.task('watch', ['watch_js', 'watch_css']);
+gulp.task('watch', ['compile', 'watch_js', 'watch_css']);
+gulp.task('default', ['watch']);

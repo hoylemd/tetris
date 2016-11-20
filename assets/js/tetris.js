@@ -1,5 +1,5 @@
 var Game = require('./game.js');
-var Block = require('./block.js');
+var Block = require('./grid_element.js');
 var game_states = require('./states.js');
 
 function TetrisGame() {
@@ -11,7 +11,7 @@ function TetrisGame() {
   this.TITLE_HEIGHT = 1;
 
   this.PLAYAREA_COLUMNS = 10;
-  this.PLAYAREA_ROWS = 20
+  this.PLAYAREA_ROWS = 20;
 
   this.PREVIEW_TITLE_HEIGHT = 1;
   this.PREVIEW_WIDTH = 4;
@@ -27,17 +27,16 @@ function TetrisGame() {
 
   this.WIDTH = (this.MARGIN + this.PLAYAREA_COLUMNS +
                 this.MARGIN + this.PREVIEW_WIDTH +
-                this.MARGIN + this.SCORE_WIDTH + this.MARGIN) // 25
-  this.width = this.WIDTH * Block.BLOCK_WIDTH;
+                this.MARGIN + this.SCORE_WIDTH + this.MARGIN);
+  this.width = this.WIDTH * Block.WIDTH;
   this.HEIGHT = (this.MARGIN + this.TITLE_HEIGHT +
                  this.MARGIN + this.PLAYAREA_ROWS + this.MARGIN);
-  this.height = this.HEIGHT * Block.BLOCK_HEIGHT;
-  this.TITLE_LEFT = Math.floor((this.WIDTH - this.TITLE_WIDTH) / 2)
+  this.height = this.HEIGHT * Block.HEIGHT;
+  this.TITLE_LEFT = Math.floor((this.WIDTH - this.TITLE_WIDTH) / 2);
 
   this.cheats = {
   };
 
-  this.tetrominos = []
   this.score = 0;
   this.last_score = this.score;
 

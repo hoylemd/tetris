@@ -1,6 +1,6 @@
 var random_int = require('./utils.js').random_int;
 var GameState = require('./game_state.js');
-var Block = require('./block.js');
+var GridElement = require('./grid_element.js');
 var TextBlock = require('./textblock.js');
 var Counter = require('./counter.js');
 
@@ -19,12 +19,12 @@ function LoadingAssetsState(game) {
 
   this.update =  function LoadingAssets_update(timedelta) {
     if (!this.loading_started) {
-      console.log('Loading assets...')
+      console.log('Loading assets...');
 
       var that = this;
-      function done_loading() {
+      var done_loading = function () {
         that.loading_done = true;
-      }
+      };
 
       // Define Textures and Atlases to load here
       var textures = [];
@@ -45,7 +45,7 @@ function LoadingAssetsState(game) {
   };
 }
 LoadingAssetsState.prototype = Object.create(GameState.prototype);
-all_states['loading_assets'] = LoadingAssetsState;
+all_states.loading_assets = LoadingAssetsState;
 
 function InitializingState(game) {
   GameState.call(this, game);
@@ -68,22 +68,22 @@ function InitializingState(game) {
     backgrounds.lineStyle(2, game.PLAYAREA_BORDER_COLOUR, 1);
 
     // create the playarea
-    backgrounds.drawRect(game.MARGIN * Block.BLOCK_WIDTH,
-                         top * Block.BLOCK_HEIGHT,
-                         game.PLAYAREA_COLUMNS * Block.BLOCK_WIDTH,
-                         game.PLAYAREA_ROWS * Block.BLOCK_WIDTH);
+    backgrounds.drawRect(game.MARGIN * GridElement.WIDTH,
+                         top * GridElement.HEIGHT,
+                         game.PLAYAREA_COLUMNS * GridElement.WIDTH,
+                         game.PLAYAREA_ROWS * GridElement.WIDTH);
 
     // preview background
-    backgrounds.drawRect(second_column * Block.BLOCK_WIDTH,
-                         info_top * Block.BLOCK_HEIGHT,
-                         game.PREVIEW_WIDTH * Block.BLOCK_WIDTH,
-                         game.PREVIEW_HEIGHT * Block.BLOCK_HEIGHT)
+    backgrounds.drawRect(second_column * GridElement.WIDTH,
+                         info_top * GridElement.HEIGHT,
+                         game.PREVIEW_WIDTH * GridElement.WIDTH,
+                         game.PREVIEW_HEIGHT * GridElement.HEIGHT);
 
     // score background
-    backgrounds.drawRect(third_column * Block.BLOCK_WIDTH,
-                         info_top * Block.BLOCK_HEIGHT,
-                         game.SCORE_WIDTH * Block.BLOCK_WIDTH,
-                         game.SCORE_HEIGHT * Block.BLOCK_HEIGHT);
+    backgrounds.drawRect(third_column * GridElement.WIDTH,
+                         info_top * GridElement.HEIGHT,
+                         game.SCORE_WIDTH * GridElement.WIDTH,
+                         game.SCORE_HEIGHT * GridElement.HEIGHT);
 
     backgrounds.endFill();
     game.stage.addChild(backgrounds);
@@ -113,15 +113,15 @@ function InitializingState(game) {
   };
 }
 InitializingState.prototype = Object.create(GameState.prototype);
-all_states['initializing'] = InitializingState;
+all_states.initializing = InitializingState;
 
 function MainState(game) {
   GameState.call(this, game);
 
   this.name = 'main';
 
-  function handle_log(object, arguments) {
-    game.log(arguments.message);
+  function handle_log(object, args) {
+    game.log(args.message);
   }
 
   this.event_handlers = {
@@ -134,10 +134,10 @@ function MainState(game) {
       game.score_indicator.value = game.score;
       game.last_score = game.score;
     }
-  }
-};
+  };
+}
 MainState.prototype = Object.create(GameState.prototype);
-all_states['main'] = MainState;
+all_states.main = MainState;
 
 function GameOverState(game) {
   GameState.call(this, game);
@@ -147,16 +147,16 @@ function GameOverState(game) {
   game.log('You lost.');
 
   function handle_reset(object) {
-    game.reset()
+    game.reset();
     game.transition('initializing');
   }
 
   this.event_handlers = {
     'reset': handle_reset
   };
-};
+}
 GameOverState.prototype = Object.create(GameState.prototype);
-all_states['game_over'] = GameOverState;
+all_states.game_over = GameOverState;
 all_states.__initial__ = 'loading_assets';
 
 module.exports = all_states;

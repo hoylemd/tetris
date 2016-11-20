@@ -1,19 +1,19 @@
 /* Class for the score indicator */
 
-var Block = require('./block.js');
+var GridElement = require('./grid_element.js');
 
 // Alias
 
 var TextureCache = PIXI.utils.TextureCache;
-var magnitude_abbreviations = 'KMBTQ'
+var magnitude_abbreviations = 'KMBTQ';
 
 function Counter(column, row, columns, value) {
   this.value = value || 0;
   this.last_value = null;
-  Block.call(this, column, row, '' + value);
+  GridElement.call(this, column, row, '' + value);
 
   this.columns = columns;
-  this.width = columns * Block.BLOCK_WIDTH;
+  this.width = columns * GridElement.WIDTH;
 
   this.type_string = 'Counter';
 
@@ -41,15 +41,15 @@ function Counter(column, row, columns, value) {
       for (var c in value_string) {
         var texture = TextureCache[value_string[c]];
         var sprite = new PIXI.Sprite(texture);
-        var offset = -delta_length + this.children.length
-        sprite.x = offset * Block.BLOCK_WIDTH;
+        var offset = -delta_length + this.children.length;
+        sprite.x = offset * GridElement.WIDTH;
         this.addChild(sprite);
       }
 
       this.last_value = this.value;
     }
-  }
+  };
 }
-Counter.prototype = new Block(0, 0);
+Counter.prototype = new GridElement(0, 0);
 
 module.exports = Counter;
