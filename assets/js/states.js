@@ -69,6 +69,7 @@ function InitializingState(game) {
                               game.PLAYAREA_COLUMNS,
                               game.PLAYAREA_ROWS);
     this.playarea.time_to_fall = game.INITIAL_TIME_TO_FALL;
+    this.playarea.seed = {column: 4, row: 19};
     game.stage.addChild(this.playarea);
     game.game_objects.push(this.playarea);
 
@@ -76,6 +77,7 @@ function InitializingState(game) {
     this.preview_area = new Block(second_column, info_top,
                                   game.PREVIEW_WIDTH,
                                   game.PREVIEW_HEIGHT);
+    this.preview_area.seed = {column: 1, row: 2};
     game.stage.addChild(this.preview_area);
     game.game_objects.push(this.preview_area);
 
