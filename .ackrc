@@ -1,0 +1,3 @@
+ --ignore-dir=static
+ --ignore-dir=assets/js/dev_libraries
+ --ignore-dir=assets/sprites
