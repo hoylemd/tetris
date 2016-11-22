@@ -21,14 +21,15 @@ function GridElement(column, row) {
   PIXI.Container.call(this);
 
   this.events = {};
-
-  // positioning
-  this.column = column;
-  this.x = WIDTH * column;
-  this.row = row;
-  this.y = WIDTH * row;
-
   this.type_string = 'GridElement';
+
+  function GridElement_updatePosition(column, row) {
+    this.column = column;
+    this.x = WIDTH * column;
+    this.row = row;
+    this.y = HEIGHT * row;
+  }
+  GridElement_updatePosition.call(this, column, row);
 
   this.stringify = function GridElement_stringify() {
     return this.type_string + ' at ' + this.positionString();
@@ -38,23 +39,9 @@ function GridElement(column, row) {
     return '(' + this.column + ', ' + this.row + ')';
   };
 
-  this.updatePosition = function GridElement_updatePosition(column, row) {
-    this.column = column;
-    this.row = row;
-    this.x = column * WIDTH;
-    this.y = row * HEIGHT;
-  };
-
+  this.updatePosition = GridElement_updatePosition;
   // engine methods
   this.update = function GridElement_update(timedelta) {
-    // snap to the grid
-    var x_drift = this.x % WIDTH;
-    var y_drift = this.y % HEIGHT;
-    if (x_drift || y_drift) {
-      this.updatePosition(this.column, this.row);
-      console.warning('a grid element (' + this.stringify() +
-                      ') is not snapped to the grid! Adjusting.');
-    }
 
     // update children
     for (var i in this.children) {
