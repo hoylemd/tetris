@@ -27,9 +27,17 @@ function Block(column, row, columns, rows, colour, border_colour) {
 
   background.endFill();
 
-  // simple add child because Pixi doesn't include functions in it's constructors
-  background.parent = this;
-  this.children.push(background);
+  this.background = background;
+  this.background_set = false;
+
+  this.update = function Block_update(timedelta) {
+    if (!this.background_set) {
+      this.addChild(this.background);
+      this.background_set = true;
+    }
+
+    Block.prototype.update.call(this, timedelta);
+  };
 }
 Block.prototype = new GridElement(0, 0);
 
