@@ -71,7 +71,7 @@ function Tetromino(type) {
   var spec = tetromino_types[this.type];
 
   if (!spec) {
-    raise('Cannot inistantiate a Tetromino of type "' + this.type + '"');
+    raise('Cannot instantiate a Tetromino of type "' + this.type + '"');
   }
 
   this.rotation = 0;
