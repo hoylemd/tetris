@@ -67,6 +67,10 @@ var tetromino_types = {
 var type_list = Object.keys(tetromino_types);
 
 function Tetromino(type) {
+  this.type_string = 'Tetromino';
+
+  GridElement.call(this, 0, 0);
+
   this.type = type || type_list[random_int(type_list.length)];
 
   var spec = tetromino_types[this.type];
@@ -76,7 +80,7 @@ function Tetromino(type) {
   }
 
   this.rotation = 0;
-  this.last_rotation = null;
+  this.last_rotation = -1;
   this.time_since_fall = 0;
 
   // create the blocks
@@ -97,16 +101,15 @@ function Tetromino(type) {
   };
 
   this.update = function Tetromino_update(timedelta) {
-    if (this.parent && this.parent.time_to_fall) {
-      var falling = this.time_since_fall > this.parent.time_to_fall;
+    Tetromino.prototype.update.call(this, timedelta);
+    var falling = (this.parent &&
+                   this.parent.time_to_fall &&
+                   this.time_since_fall > this.parent.time_to_fall);
 
-      Tetromino.prototype.update.call(this, timedelta);
-
-      var rotated_or_new = this.rotation !== this.last_rotation;
-      if (rotated_or_new) {
-        this.redraw_blocks();
-        this.last_rotation = this.rotation;
-      }
+    var rotated_or_new = this.rotation !== this.last_rotation;
+    if (rotated_or_new) {
+      this.redraw_blocks();
+      this.last_rotation = this.rotation;
     }
   };
 }
