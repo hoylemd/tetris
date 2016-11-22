@@ -111,6 +111,12 @@ function Tetromino(type) {
       this.redraw_blocks();
       this.last_rotation = this.rotation;
     }
+
+    // hide blocks that are above the playarea
+    for (var i in this.blocks) {
+      var block = this.blocks[i];
+      block.visible = block.row + this.row >= 0;
+    }
   };
 }
 Tetromino.prototype = new GridElement(0, 0);

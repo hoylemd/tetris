@@ -68,7 +68,7 @@ function InitializingState(game) {
     var playarea = new BlockSpace(game.MARGIN, top,
                                   game.PLAYAREA_COLUMNS,
                                   game.PLAYAREA_ROWS,
-                                  {column: 4, row: 0},
+                                  {column: 4, row: -1},
                                   game.INITIAL_TIME_TO_FALL);
     game.add_object(playarea);
     game.playarea = playarea;
