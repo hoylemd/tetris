@@ -39,6 +39,8 @@ function GridElement(column, row) {
   };
 
   this.updatePosition = function GridElement_updatePosition(column, row) {
+    this.column = column;
+    this.row = row;
     this.x = column * WIDTH;
     this.y = row * HEIGHT;
   };
@@ -52,6 +54,13 @@ function GridElement(column, row) {
       this.updatePosition(this.column, this.row);
       console.warning('a grid element (' + this.stringify() +
                       ') is not snapped to the grid! Adjusting.');
+    }
+
+    // update children
+    for (var i in this.children) {
+      if (this.children[i].update) {
+        this.children[i].update(timedelta);
+      }
     }
 
     var new_events = this.events;

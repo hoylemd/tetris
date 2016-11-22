@@ -1,6 +1,7 @@
 /* Class for tetrominos */
 
 var GridElement = require('./grid_element.js');
+var Block = require('./block.js');
 var random_int = require('./utils.js').random_int;
 
 var tetromino_types = {
@@ -78,12 +79,34 @@ function Tetromino(type) {
   this.last_rotation = null;
   this.time_since_fall = 0;
 
-  // create the tetrominos
+  // create the blocks
+  this.blocks = [];
+  this.redraw_blocks = function Tetromino_redraw_blocks() {
+    for (var i in this.blocks) {
+      this.removeChild(this.blocks[i]);
+    }
+    this.blocks = [];
+
+    this.blocks.push(new Block(0, 0, 1, 1, spec.colour, spec.border));
+    var shape = spec.shapes[this.rotation];
+    for (var j in shape) {
+      this.blocks.push(new Block(shape[j][0], shape[j][1], 1, 1,
+                                 spec.colour, spec.border));
+    }
+    this.addChild.apply(this, this.blocks);
+  };
 
   this.update = function Tetromino_update(timedelta) {
     if (this.parent && this.parent.time_to_fall) {
-      var rotated_or_new = this.rotation !== this.last_rotation;
       var falling = this.time_since_fall > this.parent.time_to_fall;
+
+      Tetromino.prototype.update.call(this, timedelta);
+
+      var rotated_or_new = this.rotation !== this.last_rotation;
+      if (rotated_or_new) {
+        this.redraw_blocks();
+        this.last_rotation = this.rotation;
+      }
     }
   };
 }

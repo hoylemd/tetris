@@ -68,7 +68,7 @@ function InitializingState(game) {
     var playarea = new BlockSpace(game.MARGIN, top,
                                   game.PLAYAREA_COLUMNS,
                                   game.PLAYAREA_ROWS,
-                                  {column: 4, row: 19},
+                                  {column: 4, row: 0},
                                   game.INITIAL_TIME_TO_FALL);
     game.add_object(playarea);
     game.playarea = playarea;
@@ -99,9 +99,7 @@ function InitializingState(game) {
     // create the first 2 tetrominos
     var tetromino = new Tetromino();
     playarea.add_tetromino(tetromino);
-
-    game.next_tetromino = new Tetromino();
-    game.add_object(game.next_tetromino);
+    game.tetromino = tetromino;
 
     // start!
     game.log('Welcome to Tetris');

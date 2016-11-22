@@ -10,8 +10,7 @@ function BlockSpace(column, row, columns, rows, seed, time_to_fall) {
 
   this.add_tetromino = function BlockSpace_add_tetromino(tetromino) {
     this.addChild(tetromino);
-    tetromino.column = this.seed.column;
-    tetromino.row = this.seed.row;
+    tetromino.updatePosition(this.seed.column, this.seed.row);
   };
 }
 BlockSpace.prototype = new Block(0, 0);
