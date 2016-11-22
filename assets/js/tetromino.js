@@ -113,9 +113,11 @@ function Tetromino(type) {
     }
 
     // hide blocks that are above the playarea
-    for (var i in this.blocks) {
-      var block = this.blocks[i];
-      block.visible = block.row + this.row >= 0;
+    if (falling || rotated_or_new) {
+      for (var i in this.blocks) {
+        var block = this.blocks[i];
+        block.visible = block.row + this.row >= 0;
+      }
     }
   };
 }
