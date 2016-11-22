@@ -101,6 +101,10 @@ function InitializingState(game) {
     playarea.add_tetromino(tetromino);
     game.tetromino = tetromino;
 
+    var next_tetromino = new Tetromino();
+    preview_area.add_tetromino(next_tetromino);
+    game.next_tetromino = next_tetromino;
+
     // start!
     game.log('Welcome to Tetris');
     game.transition('main');
