@@ -32,7 +32,7 @@ function Block(column, row, columns, rows, colour, border_colour) {
 
   this.update = function Block_update(timedelta) {
     if (!this.background_set) {
-      this.addChild(this.background);
+      this.addChildAt(this.background, 0);
       this.background_set = true;
     }
 
