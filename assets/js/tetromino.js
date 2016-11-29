@@ -3,67 +3,8 @@
 var GridElement = require('./grid_element.js');
 var Block = require('./block.js');
 var random_int = require('./utils.js').random_int;
+var tetromino_types = require('./tetromino_types.js');
 
-var tetromino_types = {
-  'I': {
-    'colour': 0x00CCCC,
-    'border': 0x00AAAA,
-    'shapes': [
-      [[-1, 0], [1, 0], [2, 0]],
-      [[0, -2], [0, -1], [0, 1]]
-    ]},
-  'O': {
-    'colour': 0xCCCC00,
-    'border': 0xAAAA00,
-    'shapes': [
-      [[0, -1], [1, -1], [1, 0]]
-    ]},
-  'T': {
-    'colour': 0xAA00CC,
-    'border': 0x8800AA,
-    'shapes': [
-      [[-1, 0], [0, -1], [1, 0]],
-      [[0, -1], [1, 0], [0, 1]],
-      [[-1, 0], [0, 1], [1, 0]],
-      [[0, -1], [-1, 0], [0, 1]]
-    ]},
-  'S': {
-    'colour': 0x00CC00,
-    'border': 0x00AA00,
-    'shapes': [
-      [[-1, 0], [0, -1], [1, -1]],
-      [[0, -1], [1, 0], [1, 1]],
-      [[-1, 1], [0, 1], [1, 0]],
-      [[-1, -1], [-1, 0], [0, 1]],
-    ]},
-  'Z': {
-    'colour': 0xCC0000,
-    'border': 0xAA0000,
-    'shapes': [
-      [[-1, -1], [0, -1], [1, 0]],
-      [[0, 1], [1, -1], [1, 0]],
-      [[-1, 0], [0, 1], [1, 1]],
-      [[-1, 0], [-1, 1], [0, -1]],
-    ]},
-  'J': {
-    'colour': 0x0000CC,
-    'border': 0x0000AA,
-    'shapes': [
-      [[-1, -1], [-1, 0], [1, 0]],
-      [[0, -1], [0, 1], [1, -1]],
-      [[-1, 0], [1, 0], [1, 1]],
-      [[-1, 1], [0, -1], [0, 1]],
-    ]},
-  'L': {
-    'colour': 0xCCAA00,
-    'border': 0xAA8800,
-    'shapes': [
-      [[-1, 0], [1, -1], [1, 0]],
-      [[0, -1], [0, 1], [1, 1]],
-      [[-1, 0], [-1, 1], [1, 0]],
-      [[-1, -1], [0, -1], [0, 1]],
-    ]}
-};
 var type_list = Object.keys(tetromino_types);
 
 function Tetromino(type) {
