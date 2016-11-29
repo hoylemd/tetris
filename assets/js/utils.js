@@ -49,7 +49,12 @@ function unrotate_coords(coordinates, turns) {
     turns - 1);
 }
 
+function is_numeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 module.exports = {
   what_time_is_it: what_time_is_it,
-  random_int: random_int
-}
+  random_int: random_int,
+  is_numeric: is_numeric
+};
