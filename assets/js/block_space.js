@@ -1,6 +1,7 @@
 /* Class for regions that contain tetromino blocks */
 
 var Block = require('./block.js');
+var is_numeric = require('./utils.js').is_numeric;
 
 function BlockSpace(column, row, columns, rows, seed, time_to_fall) {
   Block.call(this, column, row, columns, rows);
@@ -8,7 +9,7 @@ function BlockSpace(column, row, columns, rows, seed, time_to_fall) {
   this.seed = seed;
   this.time_to_fall = time_to_fall || null;
 
-  this.blocks = [];
+  this.tetromino = null;
   this.block_matrix = [];
   for (var i = 0; i < columns; i += 1) {
     this.block_matrix.push([]);
@@ -16,6 +17,7 @@ function BlockSpace(column, row, columns, rows, seed, time_to_fall) {
   }
 
   this.add_tetromino = function BlockSpace_add_tetromino(tetromino) {
+    this.tetromino = tetromino;
     this.addChild(tetromino);
     tetromino.updatePosition(this.seed.column, this.seed.row);
   };
