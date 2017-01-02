@@ -28,17 +28,36 @@ function Tetromino(type) {
 
   // create the blocks
   this.blocks = [];
+  this.block_matrix = null;
+
+  this.mark_block_matrix = function Tetromino_mark_block_matrix(x, y) {
+    var mark = true;
+    this.block_matrix[x + 2][y + 2] = mark;
+  };
+
+  this.check_block_matrix = function Tetromino_check_block_matrix(x, y) {
+    return this.block_matrix[x + 2][y + 2];
+  };
+
   this.redraw_blocks = function Tetromino_redraw_blocks() {
     for (var i in this.blocks) {
       this.removeChild(this.blocks[i]);
     }
     this.blocks = [];
+    this.block_matrix = [[false, false, false, false, false],
+                         [false, false, false, false, false],
+                         [false, false, false, false, false],
+                         [false, false, false, false, false],
+                         [false, false, false, false, false]];
 
     this.blocks.push(new Block(0, 0, 1, 1, spec.colour, spec.border));
     var shape = spec.shapes[this.rotation];
     for (var j in shape) {
-      this.blocks.push(new Block(shape[j][0], shape[j][1], 1, 1,
-                                 spec.colour, spec.border));
+      var coords = shape[j];
+      var x = coords[0];
+      var y = coords[1];
+      this.mark_block_matrix(x, y);
+      this.blocks.push(new Block(x, y, 1, 1, spec.colour, spec.border));
     }
     this.addChild.apply(this, this.blocks);
   };
