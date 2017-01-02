@@ -67,10 +67,28 @@ function Tetromino(type) {
 
     if (!this.parent || !this.parent.time_to_fall) return;
 
-    var falling = (this.time_since_fall > this.parent.time_to_fall);
+    this.time_since_fall += timedelta;
 
+    var falling = this.time_since_fall > this.parent.time_to_fall;
     var rotated_or_new = this.rotation !== this.last_rotation;
-    if (rotated_or_new) {
+
+    if (falling) {
+      if (this.locking) {
+        falling = false;
+        return {'locked': true};
+        // game state should check for lose state when handling the locked event
+      }
+
+      if (this.check_collision(0, 1)) {
+        falling = false;
+        this.locking = true;
+      } else {
+        this.updatePosition(this.column, this.row + 1);
+        this.time_since_fall = 0;
+      }
+    }
+
+    if (rotated_or_new || falling) {
       this.redraw_blocks();
       this.last_rotation = this.rotation;
     }
@@ -86,7 +104,33 @@ function Tetromino(type) {
 
   this.check_collision = function Tetromino_check_collision(column_offset,
                                                             row_offset) {
-    return true || false;
+    console.log('checking collisions for tetromino at ' + this.column + ', ' + this.row);
+    for (var i in this.blocks) {
+      var block = this.blocks[i];
+      var prop_column = block.column + column_offset;
+      var prop_row = block.row + row_offset;
+      var abs_column = this.column + prop_column;
+      var abs_row = this.row + prop_row;
+
+      // check for playarea boundaries
+      if (abs_column < 0 || abs_column >= this.parent.columns) {
+        return true;
+      }
+      // don't check for row < 0 because they can be popping out the top.
+      if (abs_row >= this.parent.rows) {
+        return true;
+      }
+
+      // check for other blocks
+      var not_already_here = !this.check_block_matrix(prop_column, prop_row);
+      var other_block_here = this.parent.block_matrix[abs_column][abs_row];
+      if (not_already_here && other_block_here){
+        return true;
+      }
+    }
+
+    console.log('clear!');
+    return false;
   };
 }
 Tetromino.prototype = new GridElement(0, 0);
