@@ -23,6 +23,7 @@ function Tetromino(type) {
   this.rotation = 0;
   this.last_rotation = -1;
   this.time_since_fall = 0;
+  this.locking = false;
 
   // create the blocks
   this.blocks = [];
@@ -43,9 +44,10 @@ function Tetromino(type) {
 
   this.update = function Tetromino_update(timedelta) {
     Tetromino.prototype.update.call(this, timedelta);
-    var falling = (this.parent &&
-                   this.parent.time_to_fall &&
-                   this.time_since_fall > this.parent.time_to_fall);
+
+    if (!this.parent || !this.paent.time_to_fall) return;
+
+    var falling = (this.time_since_fall > this.parent.time_to_fall);
 
     var rotated_or_new = this.rotation !== this.last_rotation;
     if (rotated_or_new) {
@@ -60,6 +62,11 @@ function Tetromino(type) {
         block.visible = block.row + this.row >= 0;
       }
     }
+  };
+
+  this.check_collision = function Tetromino_check_collision(column_offset,
+                                                            row_offset) {
+    return true || false;
   };
 }
 Tetromino.prototype = new GridElement(0, 0);
