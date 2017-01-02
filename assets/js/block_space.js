@@ -12,8 +12,7 @@ function BlockSpace(column, row, columns, rows, seed, time_to_fall) {
   this.tetromino = null;
   this.block_matrix = [];
   for (var i = 0; i < columns; i += 1) {
-    this.block_matrix.push([]);
-    this.block_matrix[i][rows] = null;
+    this.block_matrix.push(Array(rows).fill(null));
   }
 
   this.add_tetromino = function BlockSpace_add_tetromino(tetromino) {
