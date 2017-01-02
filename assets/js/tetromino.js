@@ -8,9 +8,10 @@ var tetromino_types = require('./tetromino_types.js');
 var type_list = Object.keys(tetromino_types);
 
 function Tetromino(type) {
-  this.type_string = 'Tetromino';
 
   GridElement.call(this, 0, 0);
+
+  this.type_string = 'Tetromino';
 
   this.type = type || type_list[random_int(type_list.length)];
 
@@ -45,7 +46,7 @@ function Tetromino(type) {
   this.update = function Tetromino_update(timedelta) {
     Tetromino.prototype.update.call(this, timedelta);
 
-    if (!this.parent || !this.paent.time_to_fall) return;
+    if (!this.parent || !this.parent.time_to_fall) return;
 
     var falling = (this.time_since_fall > this.parent.time_to_fall);
 
