@@ -40,8 +40,25 @@ function BlockSpace(column, row, columns, rows, seed, time_to_fall) {
       row = block.row;
     }
 
-    this.children.remove(block);
+    this.removeChild(block);
     this.block_matrix[column][row] = null;
+  };
+
+  this.consume_tetromino = function BlockSpace_consume_tetromino() {
+    var tetromino = this.tetromino;
+    var blocks = tetromino.blocks;
+
+    for (var i in blocks) {
+      var block = blocks[i];
+      var column = block.column + tetromino.column;
+      var row = block.row + tetromino.row;
+      this.add_block(block, column, row);
+    }
+
+    this.tetromino = null;
+
+    this.removeChild(tetromino);
+    return tetromino;
   };
 }
 BlockSpace.prototype = new Block(0, 0);

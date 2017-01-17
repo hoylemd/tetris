@@ -122,8 +122,17 @@ function MainState(game) {
     game.log(args.message);
   }
 
+  function handle_locked(object, args) {
+    var tetromino = game.playarea.consume_tetromino();
+    game.remove_object(tetromino);
+
+    // move the tetromino from preview to playarea
+    // generate new tetromino for preview
+  }
+
   this.event_handlers = {
     'log': handle_log,
+    'locked': handle_locked
   };
 
   this.update = function MainState_update(timedelta) {
