@@ -11,7 +11,8 @@ GameState.prototype = {
 
   event_handlers: [],
   handle_event: function base_state_handle_event(event, object, parameters) {
-    var handler = this.event_handlers[event]
+    var handler = this.event_handlers[event];
+    var colliding = false;
     if (handler) {
       handler.call(this, object, parameters);
       return true;

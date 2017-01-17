@@ -21,6 +21,9 @@ function GridElement(column, row) {
   PIXI.Container.call(this);
 
   this.events = {};
+
+  this.event_handlers = {};
+
   this.type_string = 'GridElement';
 
   function GridElement_updatePosition(column, row) {
@@ -44,15 +47,30 @@ function GridElement(column, row) {
   this.update = function GridElement_update(timedelta) {
 
     // update children
+    var events = null;
+    var new_events = [];
     for (var i in this.children) {
       if (this.children[i].update) {
-        this.children[i].update(timedelta);
+        events = this.children[i].update(timedelta);
+      }
+
+      for (var event in events) {
+        // handle locally if possible, otherwise, add object to parameters and add to own events
+        if (this.event_handlers[event]) {
+          this.event_handlers[event](events[event]);
+        } else {
+          if (this.events[event]) {
+            this.events[event].push(events[event]);
+          } else {
+            this.events[event] = [events[event]];
+          }
+        }
       }
     }
 
-    var new_events = this.events;
+    var events_to_bubble = this.events;
     this.events = {};
-    return new_events;
+    return events_to_bubble;
   };
 
   // Input handlers

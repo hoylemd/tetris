@@ -34,7 +34,7 @@ function TetrisGame() {
   this.height = this.HEIGHT * GridElement.HEIGHT;
   this.TITLE_LEFT = Math.floor((this.WIDTH - this.TITLE_WIDTH) / 2);
 
-  this.INITIAL_TIME_TO_FALL = 1500;
+  this.INITIAL_TIME_TO_FALL = 300;
 
   this.cheats = {
   };

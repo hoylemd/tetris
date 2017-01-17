@@ -85,7 +85,16 @@ Game.prototype = {
   add_object: function Game_add_object(obj) {
     this.stage.addChild(obj);
     this.game_objects.push(obj);
+  },
+
+  remove_object: function Game_remove_object(obj) {
+    var index = this.game_objects.indexOf(obj);
+    if (index > -1) {
+      this.game_objects.splice(index);
+    }
+    this.stage.removeChild(obj);
   }
+
 };
 
 module.exports = Game;

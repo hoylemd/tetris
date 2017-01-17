@@ -36,7 +36,7 @@ function Block(column, row, columns, rows, colour, border_colour) {
       this.background_set = true;
     }
 
-    Block.prototype.update.call(this, timedelta);
+    return Block.prototype.update.call(this, timedelta);
   };
 }
 Block.prototype = new GridElement(0, 0);
