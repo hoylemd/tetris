@@ -128,8 +128,8 @@ function MainState(game) {
     var tetromino = game.playarea.consume_tetromino();
     game.remove_object(tetromino);
 
-    // move the tetromino from preview to playarea
-    // generate new tetromino for preview
+    game.playarea.add_tetromino(game.preview_area.tetromino);
+    game.preview_area.add_tetromino(new Tetromino());
   }
 
   this.event_handlers = {
