@@ -69,7 +69,8 @@ function InitializingState(game) {
                                   game.PLAYAREA_COLUMNS,
                                   game.PLAYAREA_ROWS,
                                   {column: 4, row: -1},
-                                  game.INITIAL_TIME_TO_FALL);
+                                  game.INITIAL_TIME_TO_FALL,
+                                  'play area');
     game.add_object(playarea);
     game.playarea = playarea;
 
@@ -77,7 +78,8 @@ function InitializingState(game) {
     var preview_area = new BlockSpace(second_column, info_top,
                                       game.PREVIEW_WIDTH,
                                       game.PREVIEW_HEIGHT,
-                                      {column: 1, row: 2});
+                                      {column: 1, row: 2},
+                                      'preview area');
     game.add_object(preview_area);
     game.preview_area = preview_area;
 
@@ -85,7 +87,7 @@ function InitializingState(game) {
     var title = new TextBlock(game.TITLE_LEFT, game.MARGIN, 'TETRIS');
     game.add_object(title);
 
-    // create the preview
+    // create the preview title
     var preview_title = new TextBlock(second_column, top, 'NEXT');
     game.add_object(preview_title);
 
@@ -126,8 +128,8 @@ function MainState(game) {
     var tetromino = game.playarea.consume_tetromino();
     game.remove_object(tetromino);
 
-    // move the tetromino from preview to playarea
-    // generate new tetromino for preview
+    game.playarea.add_tetromino(game.preview_area.tetromino);
+    game.preview_area.add_tetromino(new Tetromino());
   }
 
   this.event_handlers = {

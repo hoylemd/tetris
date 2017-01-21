@@ -3,8 +3,10 @@
 var Block = require('./block.js');
 var is_numeric = require('./utils.js').is_numeric;
 
-function BlockSpace(column, row, columns, rows, seed, time_to_fall) {
+function BlockSpace(column, row, columns, rows, seed, time_to_fall, name) {
   Block.call(this, column, row, columns, rows);
+
+  this.name = name;
 
   this.seed = seed;
   this.time_to_fall = time_to_fall || null;
