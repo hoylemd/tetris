@@ -104,7 +104,6 @@ function Tetromino(type) {
 
   this.check_collision = function Tetromino_check_collision(column_offset,
                                                             row_offset) {
-    console.log('checking collisions for tetromino at ' + this.column + ', ' + this.row);
     for (var i in this.blocks) {
       var block = this.blocks[i];
       var prop_column = block.column + column_offset;
@@ -129,7 +128,6 @@ function Tetromino(type) {
       }
     }
 
-    console.log('clear!');
     return false;
   };
 }
