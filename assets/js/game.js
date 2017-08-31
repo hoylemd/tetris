@@ -69,11 +69,17 @@ Game.prototype = {
   log_element: null,
   log: function Game_log(message) {
     if (!this.log_element) {
-      this.log_element = $('.game_log');
+      var log_element = $('.game_log');
+      if (log_element.length) {
+        this.log_element = log_element;
+      }
     }
-
-    var entry = $('<div class="log_entry">' + message + '</div>');
-    this.log_element.append(entry);
+    if (this.log_element) {
+      var entry = $('<div class="log_entry">' + message + '</div>');
+      this.log_element.append(entry);
+    } else {
+      window.console.log(message);
+    }
   },
 
   reset: function Game_reset() {
