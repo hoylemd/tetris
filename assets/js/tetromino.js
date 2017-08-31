@@ -104,6 +104,9 @@ function Tetromino(type) {
 
   this.check_collision = function Tetromino_check_collision(column_offset,
                                                             row_offset) {
+    /* column_offset and row_offset are relative to current position */
+    column_offset = column_offset || 0;
+    row_offset = row_offset || 0;
     for (var i in this.blocks) {
       var block = this.blocks[i];
       var prop_column = block.column + column_offset;
