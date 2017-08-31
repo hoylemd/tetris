@@ -23,6 +23,10 @@ function BlockSpace(column, row, columns, rows, seed, time_to_fall, name) {
     tetromino.updatePosition(this.seed.column, this.seed.row);
   };
 
+  this.check_collision = function BlockSpace_check_collision() {
+    return this.tetromino.check_collision();
+  };
+
   this.add_block = function BlockSpace_add_block(block, column, row) {
     block.column = column;
     block.row = row;
@@ -57,10 +61,13 @@ function BlockSpace(column, row, columns, rows, seed, time_to_fall, name) {
       this.add_block(block, column, row);
     }
 
-    this.tetromino = null;
-
-    this.removeChild(tetromino);
+    this.clear_tetromino();
     return tetromino;
+  };
+
+  this.clear_tetromino = function BlockSpac_clear_tetromino() {
+    this.removeChild(this.tetromino);
+    this.tetromino = null;
   };
 }
 BlockSpace.prototype = new Block(0, 0);
