@@ -130,6 +130,11 @@ function MainState(game) {
 
     game.playarea.add_tetromino(game.preview_area.tetromino);
     game.preview_area.add_tetromino(new Tetromino());
+
+    if (game.playarea.check_collision()) {
+      game.playarea.clear_tetromino();
+      game.transition('game_over');
+    }
   }
 
   this.event_handlers = {
